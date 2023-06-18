@@ -39,6 +39,29 @@ async def on_message(message):
             await message.channel.send("pong")
         except Exception as e:
             print(f"Error sending message: {e}")
-
+    elif message.content.startswith("$pfp"):
+        try:
+            # Check if a user is mentioned
+            if len(message.mentions) == 0:
+                await message.channel.send("You need to mention a user.")
+            else:
+                mentioned_user = message.mentions[0]  # Get the first mentioned user
+                await message.channel.send(mentioned_user.avatar.url)  # Send the URL of their profile picture
+        except Exception as e:
+            print(f"Error sending message: {e}")
+    elif message.content == "$boost":
+        try:
+            server = message.guild
+            boosts = server.premium_subscription_count
+            boosters = [(member, member.premium_since) for member in server.members if member.premium_since is not None]
+            
+            if len(boosters) == 0:
+                await message.channel.send("No one is currently boosting the server.")
+            else:
+                boost_info = "\n".join(f"{booster[0].name} ({booster[0].id}) - Boosting since: {booster[1]}" for booster in boosters)
+                response = f"The server currently has {boosts} boosts.\nBoosters:\n{boost_info}"
+                await message.channel.send(response)
+        except Exception as e:
+            print(f"Error sending message: {e}")
 #Replace BOT_TOKEN with your bot token
 client.run('BOT_TOKEN')
