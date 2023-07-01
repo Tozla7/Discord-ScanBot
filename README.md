@@ -1,5 +1,5 @@
 # Discord-ScanBot
-Discord bot in .py that scans for TOS bans and name changes
+Discord bot in .py that scans for name changes
 
 
 
