@@ -49,18 +49,6 @@ async def on_message(message):
                 await message.channel.send(mentioned_user.avatar.url)  # Send the URL of their profile picture
         except Exception as e:
             print(f"Error sending message: {e}")
-    elif message.content.startswith("$banner"):
-    try:
-        if len(message.mentions) == 0:
-            await message.channel.send("You need to mention a user.")
-        else:
-            mentioned_user = message.mentions[0]
-            if mentioned_user.banner:
-                await message.channel.send(mentioned_user.banner.url)
-            else:
-                await message.channel.send("The mentioned user does not have a banner.")
-    except Exception as e:
-        await message.channel.send(f"An error occurred: {e}")
     elif message.content == "$boost":
         try:
             server = message.guild
